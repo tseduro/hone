@@ -6,7 +6,7 @@ const Navbar = () => {
           <Link
               to="/">
               <span className='font-semibold text-lg flex items-center gap-3 text-blue-400'>
-                  <span className="font-semibold text-2xl">React Router</span>
+                  <span className="font-semibold text-2xl">Hone</span>
               </span>
           </Link>
 
