@@ -1,6 +1,10 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import Navbar from './components/Navbar';
 import { createClient } from '@supabase/supabase-js';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 
 const supabase = createClient(
   "https://elvnswrwvepdjcjspwil.supabase.co",
@@ -22,7 +26,7 @@ function App() {
     }
 
     checkData();
-  }, [] )
+    }, [] );
 
   async function signUp() {
     
@@ -62,8 +66,12 @@ function App() {
 
   return userData?.session != null ?(
   <>
-  <div>
-    <h1>Hello, {userData.session.user.email}</h1>
+  <div className='min-h-screen flex flex-col bg-gray-50'>
+    <Navbar />
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='/Dashboard' element={<Dashboard />}/>
+    </Routes>
     <button onClick={signOut}>Sign Out</button>
   </div>
   </>
