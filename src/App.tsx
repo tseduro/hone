@@ -1,116 +1,31 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
-import Navbar from './components/Navbar';
-import { createClient } from '@supabase/supabase-js';
+import { Link } from "react-router-dom"
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
 
-const supabase = createClient(
-  "https://elvnswrwvepdjcjspwil.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsdm5zd3J3dmVwZGpjanNwd2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMjIzMzQsImV4cCI6MjA3OTU5ODMzNH0.xjxsxydWLjIlZqVkP7dPyHZfwXCPExnypg22VTJjQdM"
-)
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Landing from "./pages/Landing";
+import Wrapper from "./pages/Wrapper";
 
 function App() {
 
-  const[email, setEmail] = useState("");
-  const[password, setPassword] = useState("");
-  const[userData, setUserData] = useState(null);
-
-  useEffect(() => {
-
-    async function checkData() {
-
-      const{data, error} = await supabase.auth.getSession();
-      setUserData(data);
-    }
-
-    checkData();
-    }, [] );
-
-  async function signUp() {
-    
-    const {data, error} = await supabase.auth.signUp({
-      email:email,
-      password:password,
-    });
-
-    if(error){
-      alert("Error Signing Up");
-    }else{
-      setUserData(data);
-      console.log(data);
-    }
-  }
-
-  async function signIn() {
-    
-    const {data, error} = await supabase.auth.signInWithPassword({
-      email:email,
-      password:password,
-    });
-
-    if(error){
-      alert("Error Signing In");
-    }else{
-      setUserData(data);
-      console.log(data);
-    }
-  }
-
-  async function signOut() {
-    
-    const {data, error} = await supabase.auth.signOut();
-    setUserData(null);
-  }
-
-  return userData?.session != null ?(
-  <>
-  <div className='min-h-screen flex flex-col bg-gray-50'>
-    <Navbar />
-    <Routes>
-      <Route path='/' element={<Home />}/>
-      <Route path='/Dashboard' element={<Dashboard />}/>
-    </Routes>
-    <button onClick={signOut}>Sign Out</button>
-  </div>
-  </>
-  ):(
-  <>
-  <div>
-    <input 
-    onChange={(e) => {
-      setEmail(e.target.value)
-    }} 
-    type ="email" 
-    placeholder='Enter your email'
-    />
-    <input 
-    onChange={(e)=>{
-      setPassword(e.target.value)
-      }} 
-      type="password" 
-      placeholder='Choose a password' 
-    />
-    <button onClick={signUp}>Sign up</button>
-    <hr />
-    <input 
-    onChange={(e) => {
-      setEmail(e.target.value)
-      }} 
-      type ="email" 
-      placeholder='Enter your email'
-    />
-    <input 
-    onChange={(e) => 
-      {setPassword(e.target.value)
-    }} 
-    type="password" 
-    placeholder='Enter your password' 
-    />
-    <button onClick={signIn}>Login</button>  
-  </div>
-  </>
-)}
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
+      <div className="max-w-2xl text-center space-y-8">
+        <Routes>
+          <Route path='/SignIn' element={<SignIn />} />
+          <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/' element={<Landing />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
+          <Route path='/Home' element={
+            <Wrapper>
+              <Home />
+            </Wrapper>} />
+        </Routes>
+      </div>
+    </div>
+  )
+}
 
 export default App
