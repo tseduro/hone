@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 function Landing() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4 max-w-2xl text-center space-y-8">
+      <h1>Hone</h1>
       <div className="flex gap-4 justify-center flex-wrap">
         <Link
           to="/SignIn"
