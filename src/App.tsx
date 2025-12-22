@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
 import Wrapper from "./pages/Wrapper";
 
@@ -18,7 +17,6 @@ function App() {
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/' element={<Landing />} />
           <Route path='/Landing' element={<Landing />} />
-          <Route path='/Dashboard' element={<Dashboard />} />
           <Route path='/Home' element={
             <Wrapper>
               <Home />

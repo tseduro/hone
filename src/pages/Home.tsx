@@ -1,20 +1,36 @@
 import supabase from '../helper/supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
 
 function Home() {
-const navigate = useNavigate();
+  const [habits, setHabits] = useState([]);
 
-const signOut = async () => {
-  const {error} = await supabase.auth.signOut();
-  if(error) throw error;
-  navigate("/");
-}
+  useEffect(() => {
+    fetchHabits();
+  }, [])
+
+  async function fetchHabits() {
+    const { data, error } = await supabase.from("habitsTable").select("*").order("created_at", { ascending: true })
+    if (error) console.error(error);
+    else if (typeof data === "string") { setHabits(data) }
+  }
 
   return (
-    <div>
-      <h2>Welcome!</h2>
-      <button onClick={signOut}>Sign Out</button>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h2>Welcome!</h2>
+        <div>
+          {
+            habits.map(habit => (
+              <div key={habit}>
+                <span>{habit}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </>
   )
 }
 
