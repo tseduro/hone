@@ -2,8 +2,15 @@ import supabase from '../helper/supabaseClient';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
+type Habit = {
+ id: number
+ title: string
+ description?: string
+ frequency: string
+}
+
 function Home() {
-  const [habits, setHabits] = useState([""]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
     fetchHabits();
@@ -12,10 +19,9 @@ function Home() {
   async function fetchHabits() {
     const { data, error } = await supabase
       .from("habitsTable")
-      .select()
-      .overrideTypes<Array<{title: string}>>()
+      .select("*")
     if (error) console.error(error);
-    else if (typeof data === "string") { setHabits(data) }
+    else { setHabits(data) }
   }
 
   return (
@@ -24,6 +30,7 @@ function Home() {
       <div>
         <h2>Welcome!</h2>
         <div>
+          <button onClick={fetchHabits}> test </button>
         </div>
       </div>
     </>
