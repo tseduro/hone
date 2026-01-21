@@ -61,13 +61,14 @@ function SignIn() {
               required
             />
           </div>
-          <button type='submit' className='border hover:bg-blue-800 w-full btn-primary px-4 py-3 rounded-lg font-semibold text-lg'> Sign In</button>
+          <button type='submit' className='border hover:bg-blue-800 w-full btn-primary px-1 py-1 rounded-lg font-semibold text-md'> Sign In</button>
         </form>
+      </div>
         <div className='mt-6 text-center'>
           <p className='text-sm text-muted-foreground'>Don't have an Account?</p>
           <Link to='/SignUp' className='text-primary hover:underline font-medium'> Sign Up </Link>
         </div>
-      </div>
+      
     </div>
   );
 
