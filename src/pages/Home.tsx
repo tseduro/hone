@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
 type Habit = {
- id: number
- title: string
- description?: string
- frequency: string
+  id: number
+  title: string
+  description?: string
+  frequency: string
 }
 
 function Home() {
@@ -26,11 +26,13 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <div>
-        <h2>Welcome!</h2>
+        <Navbar />
         <div>
-          <button onClick={fetchHabits}> test </button>
+          <h2>Welcome!</h2>
+          <div>
+            <button onClick={fetchHabits} className='border border-border hover:bg-blue-600 px-2 rounded-lg'> test </button>
+          </div>
         </div>
       </div>
     </>

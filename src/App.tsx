@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
+import About from "./pages/About";
 import Wrapper from "./pages/Wrapper";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/' element={<Landing />} />
           <Route path='/Landing' element={<Landing />} />
+          <Route path= '/About' element={<About />}/>
           <Route path='/Home' element={
             <Wrapper>
               <Home />
